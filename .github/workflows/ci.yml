@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+
     runs-on: windows-latest
 
     steps:
@@ -18,14 +19,11 @@ jobs:
       with:
         dotnet-version: '8.0.x'
         
-    - name: Find solution file
-      run: echo "SOLUTION_FILE=$(ls *.sln | head -n 1)" >> $GITHUB_ENV
-      
     - name: Restore dependencies
-      run: dotnet restore ${{ env.SOLUTION_FILE }}
+      run: dotnet restore
       
     - name: Build
-      run: dotnet build ${{ env.SOLUTION_FILE }} --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
       
     - name: Test
-      run: dotnet test ${{ env.SOLUTION_FILE }} --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal
