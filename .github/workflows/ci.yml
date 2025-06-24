@@ -1,7 +1,29 @@
-name: Minimal CI
-on: [workflow_dispatch]  # Только ручной запуск
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  placeholder:
+  build:
+
     runs-on: windows-latest
+
     steps:
-      - run: echo "Base for GA activation"
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
