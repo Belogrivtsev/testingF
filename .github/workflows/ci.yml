@@ -2,13 +2,13 @@ name: CI
 
 on:
   push:
-    branches: [ '**' ]  # Все ветки
-    branches-ignore: [ main ]  # Опционально: исключить main
+    branches: [ main ]
   pull_request:
-    branches: [ '**' ]  # Все PR
+    branches: [ main ]
 
 jobs:
   build:
+
     runs-on: windows-latest
 
     steps:
