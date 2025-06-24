@@ -1,0 +1,7 @@
+name: Minimal CI
+on: [workflow_dispatch]  # Только ручной запуск
+jobs:
+  placeholder:
+    runs-on: windows-latest
+    steps:
+      - run: echo "Base for GA activation"
